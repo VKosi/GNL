@@ -6,7 +6,7 @@
 /*   By: vkosi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 14:10:54 by vkosi             #+#    #+#             */
-/*   Updated: 2019/07/06 12:22:28 by vkosi            ###   ########.fr       */
+/*   Updated: 2019/07/06 13:33:16 by vkosi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 # include <limits.h>
 # include <fcntl.h>
 # include "libft/libft.h"

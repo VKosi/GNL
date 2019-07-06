@@ -6,7 +6,7 @@
 /*   By: kngalalu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 08:59:39 by kngalalu          #+#    #+#             */
-/*   Updated: 2019/07/06 09:06:48 by kngalalu         ###   ########.fr       */
+/*   Updated: 2019/07/06 14:22:12 by vkosi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		 main()
 	char	*line;
 	char 	ret;
 	
-	fd = open("bible.txt", O_RDONLY);
+	fd = open("gen.txt", O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		ft_putendl(line);	
