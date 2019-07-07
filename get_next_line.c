@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vkosi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/07 15:57:07 by vkosi             #+#    #+#             */
+/*   Updated: 2019/07/07 16:05:15 by vkosi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		read_line(char **ptr, char **line, int fd, int read_val)
+int		line_read(char **ptr, char **line, int fd, int rd_value)
 {
-	char	*temp;
+	char	*tmp;
 	int		index;
 
 	index = 0;
@@ -12,15 +23,15 @@ int		read_line(char **ptr, char **line, int fd, int read_val)
 	if (ptr[fd][index] == '\n')
 	{
 		*line = ft_strsub(ptr[fd], 0, index);
-		temp = ft_strdup(ptr[fd] + index + 1);
+		tmp = ft_strdup(ptr[fd] + index + 1);
 		free(ptr[fd]);
-		ptr[fd] = temp;
+		ptr[fd] = tmp;
 		if (ptr[fd][0] == '\0')
 			ft_strdel(&ptr[fd]);
 	}
 	else if (ptr[fd][index] == '\0')
 	{
-		if (read_val == BUFF_SIZE)
+		if (rd_value == BUFF_SIZE)
 			return (get_next_line(fd, line));
 		*line = ft_strdup(ptr[fd]);
 		ft_strdel(&ptr[fd]);
@@ -30,16 +41,16 @@ int		read_line(char **ptr, char **line, int fd, int read_val)
 
 int		get_next_line(const int fd, char **line)
 {
-	int			read_val;
+	int			rd_value;
 	char		*ptr_copy;
 	char		buffer[BUFF_SIZE + 1];
 	static char	*ptr[255];
 
 	if (fd < 0 || line == NULL)
 		return (-1);
-	while ((read_val = read(fd, buffer, BUFF_SIZE)) > 0)
+	while ((rd_value = read(fd, buffer, BUFF_SIZE)) > 0)
 	{
-		buffer[read_val] = '\0';
+		buffer[rd_value] = '\0';
 		if (ptr[fd] == NULL)
 			ptr[fd] = ft_strnew(1);
 		ptr_copy = ft_strjoin(ptr[fd], buffer);
@@ -48,9 +59,9 @@ int		get_next_line(const int fd, char **line)
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
-	if (read_val < 0)
+	if (rd_value < 0)
 		return (-1);
-	else if (read_val == 0 && (ptr[fd] == NULL || ptr[fd][0] == '\0'))
+	else if (rd_value == 0 && (ptr[fd] == NULL || ptr[fd][0] == '\0'))
 		return (0);
-	return (read_line(ptr, line, fd, read_val));
+	return (line_read(ptr, line, fd, rd_value));
 }
